@@ -3,6 +3,8 @@ using UnityEngine;
 public class PlayerAttack : MonoBehaviour
 {
    [SerializeField] private float attackCooldown;
+   [SerializeField] private Transform firePoint;
+   [SerializeField] private GameObject[] pineapples;
    private Animator anim;
    private PlayerMovement playerMovement;
    private float cooldownTimer = Mathf.Infinity;
@@ -27,7 +29,22 @@ public class PlayerAttack : MonoBehaviour
 	   anim.SetTrigger("attack");
 	   cooldownTimer = 0;
 
+	   int pineappleIndex = FindPineapple();
+	   GameObject pineapple = pineapples[pineappleIndex];
 
+	   pineapple.transform.position = firePoint.position;
+	   pineapple.GetComponent<Pineapple>().SetDirection(Mathf.Sign(transform.localScale.x));
+
+   }
+
+   private int FindPineapple()
+   {
+	   for (int i = 0; i < pineapples.Length; i++)
+	   {
+		   if (!pineapples[i].activeInHierarchy)
+			return i;
+	   }
+	   return 0;
    }
 
 }
