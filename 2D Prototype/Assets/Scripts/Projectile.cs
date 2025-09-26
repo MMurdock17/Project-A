@@ -26,9 +26,13 @@ private void Update()
 
 private void OnTriggerEnter2D(Collider2D collision)
 {
+	if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+    {
+	
 	hit = true;
 	boxCollider.enabled = false;
 	anim.SetTrigger("Impact");
+	}
 }
 
 public void SetDirection(float _direction)
