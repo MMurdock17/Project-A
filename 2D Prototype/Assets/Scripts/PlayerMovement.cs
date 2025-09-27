@@ -9,6 +9,7 @@ public class PlayerMovement : MonoBehaviour
     private Animator anim;
     private bool grounded;
     private float move;
+    private bool facingRight = true;
 
     private void Awake()
     {
