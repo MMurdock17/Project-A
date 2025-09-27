@@ -7,6 +7,11 @@ public class Door : MonoBehaviour
 [SerializeField] private Transform nextRoom;
 [SerializeField] private CameraController camera;
 
+private void Awake()
+{
+        camera = Camera.main.GetComponent<CameraController>();
+}
+
 private void OnTriggerEnter2D(Collider2D collision)
 {
     if (collision.tag == "Player")
