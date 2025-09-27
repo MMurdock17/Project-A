@@ -31,6 +31,10 @@ private void Update()
 
 private void OnTriggerEnter2D(Collider2D collision)
 {
+	Debug.Log("Projectile collided with: " + collision.name);
+	
+	if (collision.gameObject == this.gameObject) return;
+
 	hit = true;
 	boxCollider.enabled = false;
 	anim.SetTrigger("Impact");
