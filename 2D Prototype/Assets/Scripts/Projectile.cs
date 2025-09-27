@@ -55,7 +55,6 @@ public void SetDirection(float _direction)
 		transform.localScale = new Vector3(localScaleX, transform.localScale.y, transform.localScale.z);
 
 }
-
 private void Deactivate()
 {
 	gameObject.SetActive(false);
