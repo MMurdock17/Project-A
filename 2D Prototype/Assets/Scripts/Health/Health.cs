@@ -56,15 +56,15 @@ public class Health : MonoBehaviour
                     component.enabled = false;
 
                 dead = true;
-                SoundManager.instance.PlaySound(deathSound);
 
-                //Invoke(nameof(HandleRespawn), 2f);
+                Invoke(nameof(GameOver), 1f);
             }
         }
 
     }
-    /*private void HandleRespawn()
+    private void GameOver()
 {
-    GetComponent<PlayerRespawn>().Respawn();
-}*/
+    FindObjectOfType<UIManager>().GameOver();
+}
+    
 }
