@@ -7,6 +7,9 @@ public class Health : MonoBehaviour
     private Animator anim;
     private bool dead;
 
+    [Header ("Death Sound")]
+    [SerializeField] private AudioClip deathSound;
+
     private void Awake()
     {
         currentHealth = startingHealth;
@@ -27,6 +30,9 @@ public class Health : MonoBehaviour
             {
                 anim.SetTrigger("die");
                 GetComponent<PlayerMovement>().enabled = false;
+
+                dead = true;
+                SoundManager.instance.PlaySound(deathSound);
             }
         }
     }
