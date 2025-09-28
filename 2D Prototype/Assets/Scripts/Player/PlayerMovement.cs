@@ -11,6 +11,9 @@ public class PlayerMovement : MonoBehaviour
     private float move;
     private bool facingRight = true;
 
+    [Header ("SFX")]
+    [SerializeField] private AudioClip jumpSound;
+
     private void Awake()
     {
         body = GetComponent<Rigidbody2D>();
@@ -39,6 +42,7 @@ private void Update()
 
 private void Jump()
 {
+    SoundManager.instance.PlaySound(jumpSound);
     body.linearVelocity = new Vector2(body.linearVelocity.x, speed);
     anim.SetTrigger("jump");
     grounded = false;
