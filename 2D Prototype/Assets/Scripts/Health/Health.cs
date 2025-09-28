@@ -10,6 +10,8 @@ public class Health : MonoBehaviour
     [Header ("Death Sound")]
     [SerializeField] private AudioClip deathSound;
 
+    [SerializeField] private Behaviour[] components;
+
     private void Awake()
     {
         currentHealth = startingHealth;
@@ -23,9 +25,16 @@ public class Health : MonoBehaviour
 
     public void Respawn()
     {
-        AddHealth(startingHealth);
-        anim.ResetTrigger("die");
-        anim.Play("Idle");
+        dead = false;
+
+    foreach (Behaviour component in components)
+        component.enabled = true;
+
+    GetComponent<PlayerMovement>().enabled = true;
+
+    AddHealth(startingHealth);
+    anim.ResetTrigger("die");
+    anim.Play("Idle");
     }
 
     public void TakeDamage(float _damage)
@@ -43,10 +52,19 @@ public class Health : MonoBehaviour
                 anim.SetTrigger("die");
                 GetComponent<PlayerMovement>().enabled = false;
 
+                foreach (Behaviour component in components)
+                    component.enabled = false;
+
                 dead = true;
                 SoundManager.instance.PlaySound(deathSound);
+
+                Invoke(nameof(HandleRespawn), 2f);
             }
         }
-    }
 
+    }
+    private void HandleRespawn()
+{
+    GetComponent<PlayerRespawn>().Respawn();
+}
 }

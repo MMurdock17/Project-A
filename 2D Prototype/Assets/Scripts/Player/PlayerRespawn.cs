@@ -2,15 +2,21 @@ using UnityEngine;
 
 public class PlayerRespawn : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    private Health playerHealth;
+    private Vector3 startPosition;
 
-    // Update is called once per frame
-    void Update()
+    private void Awake()
     {
-        
+        playerHealth = GetComponent<Health>();
+        startPosition = transform.position;
+    }
+    public void Respawn()
+    {
+    
+        transform.position = startPosition;
+
+    playerHealth.Respawn();
+
+    Camera.main.GetComponent<CameraController>().NewRoom(transform.parent);
     }
 }
