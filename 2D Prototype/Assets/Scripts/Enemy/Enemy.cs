@@ -26,6 +26,9 @@ public class Enemy : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         enemyPatrol = GetComponentInParent<EnemyPatrol>();
+
+        if (boxCollider == null)
+        boxCollider = GetComponent<BoxCollider2D>();
     }
 
     private void Update()
@@ -71,6 +74,9 @@ public class Enemy : MonoBehaviour
 
     private void OnDrawGizmos()
     {
+
+        if (boxCollider == null) return;
+
         Gizmos.color = Color.red;
         Gizmos.DrawWireCube(boxCollider.bounds.center + transform.right * range * transform.localScale.x, new Vector3(boxCollider.bounds.size.x * range, boxCollider.bounds.size.y, boxCollider.bounds.size.z));
     }
