@@ -23,7 +23,7 @@ public class Health : MonoBehaviour
         currentHealth = Mathf.Clamp(currentHealth + _value, 0, startingHealth);
     }
 
-    public void Respawn()
+   /* public void Respawn()
     {
         dead = false;
 
@@ -35,7 +35,7 @@ public class Health : MonoBehaviour
     AddHealth(startingHealth);
     anim.ResetTrigger("die");
     anim.Play("Idle");
-    }
+    } */
 
     public void TakeDamage(float _damage)
     {
@@ -58,13 +58,13 @@ public class Health : MonoBehaviour
                 dead = true;
                 SoundManager.instance.PlaySound(deathSound);
 
-                Invoke(nameof(HandleRespawn), 2f);
+                //Invoke(nameof(HandleRespawn), 2f);
             }
         }
 
     }
-    private void HandleRespawn()
+    /*private void HandleRespawn()
 {
     GetComponent<PlayerRespawn>().Respawn();
-}
+}*/
 }

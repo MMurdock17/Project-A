@@ -2,15 +2,12 @@ using UnityEngine;
 
 public class UIManager : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    [SerializeField] private GameObject gameOverScreen;
+    [SerializeField] private AudioClip gameOverSound;
 
-    // Update is called once per frame
-    void Update()
+    public void GameOver()
     {
-        
+        gameOverScreen.SetActive(true);
+        SoundManager.instance.PlaySound(gameOverSound);
     }
 }

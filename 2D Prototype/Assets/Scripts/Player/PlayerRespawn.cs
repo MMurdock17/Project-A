@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PlayerRespawn : MonoBehaviour
 {
-    private Health playerHealth;
+ /*   private Health playerHealth;
     private Vector3 startPosition;
 
     private void Awake()
@@ -18,5 +18,5 @@ public class PlayerRespawn : MonoBehaviour
     playerHealth.Respawn();
 
     Camera.main.GetComponent<CameraController>().NewRoom(transform.parent);
-    }
+    } */
 }
