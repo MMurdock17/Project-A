@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class EnemyPatrol : MonoBehaviour
 {
+    //Info on enemy
     [Header ("Patrol Points")]
     [SerializeField] private Transform leftEdge;
     [SerializeField] private Transform rightEdge;
@@ -28,11 +29,13 @@ public class EnemyPatrol : MonoBehaviour
 
     private void OnDisable()
     {
+        //Stop moving animation
         anim.SetBool("moving", false);
     }
 
     private void Update()
     {
+        //Switching directions and turning once reaching edge
         if (movingLeft)
         {
             if (enemy.position.x >= leftEdge.position.x)
@@ -54,6 +57,7 @@ public class EnemyPatrol : MonoBehaviour
         }
     }
 
+    //Direction change at edges
     private void DirectionChange()
     {
         idleTimer += Time.deltaTime;
@@ -62,13 +66,14 @@ public class EnemyPatrol : MonoBehaviour
         if (idleTimer > idleDuration)
             movingLeft = !movingLeft;
     }
-
+    //Move enemy in direction
     private void MoveInDirection(int _direction)
     {
         idleTimer = 0;
 
         anim.SetBool("moving", true);
 
+        //Flip based on direction
         enemy.localScale = new Vector3(Mathf.Abs(initScale.x) * _direction, initScale.y, initScale.z);
 
         enemy.position = new Vector3(enemy.position.x + Time.deltaTime * _direction * speed, enemy.position.y, enemy.position.z);

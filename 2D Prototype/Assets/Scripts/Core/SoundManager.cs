@@ -2,12 +2,18 @@ using UnityEngine;
 
 public class SoundManager : MonoBehaviour
 {
+	//Instance of sound manager
 	public static SoundManager instance { get; private set; }
+
+	//Sound effects
 	private AudioSource source;
+
+	//Music
 	private AudioSource musicSource;
 
 	private void Awake()
 	{
+		//Audio source for sounds effects and music
 		source = GetComponent<AudioSource>();
 		musicSource = transform.GetChild(0).GetComponent<AudioSource>();
 
@@ -21,9 +27,11 @@ public class SoundManager : MonoBehaviour
 	}
 	public void PlaySound(AudioClip _sound)
 	{
+		//Play sound effect once
 		source.PlayOneShot(_sound);
 	}
 
+	//Change sound effect volume
 	public void ChangeSoundVolume(float _change)
 	{
 		float currentVolume = PlayerPrefs.GetFloat("soundVolume");
@@ -36,9 +44,11 @@ public class SoundManager : MonoBehaviour
 
 		source.volume = currentVolume;
 
+		//Save sound effect settings
 		PlayerPrefs.SetFloat("soundVolume", currentVolume);
 	}
 
+	//Change music volume
 	public void ChangeMusicVolume(float _change)
 	{
 		float currentVolume = PlayerPrefs.GetFloat("musicVolume");
@@ -51,6 +61,7 @@ public class SoundManager : MonoBehaviour
 
 		musicSource.volume = currentVolume;
 
+		//Save music settings
 		PlayerPrefs.SetFloat("musicVolume", currentVolume);
 	}
 

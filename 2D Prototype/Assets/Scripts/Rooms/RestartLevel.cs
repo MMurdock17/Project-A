@@ -2,15 +2,10 @@ using UnityEngine;
 
 public class RestartLevel : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    //Restart level and set time scale back to normal
+    public void LoadCurrentScene()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        UnityEngine.SceneManagement.SceneManager.LoadScene("Level1");
+        Time.timeScale = 1;
     }
 }

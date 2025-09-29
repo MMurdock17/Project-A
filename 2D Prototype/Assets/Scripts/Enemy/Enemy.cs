@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    //Info for enemy
     [Header ("Attack Parameters")]
     [SerializeField] private float attackCooldown;
     [SerializeField] private float range;
@@ -27,6 +28,7 @@ public class Enemy : MonoBehaviour
         anim = GetComponent<Animator>();
         enemyPatrol = GetComponentInParent<EnemyPatrol>();
 
+        //check for collider reference
         if (boxCollider == null)
         boxCollider = GetComponent<BoxCollider2D>();
     }
@@ -35,6 +37,7 @@ public class Enemy : MonoBehaviour
     {
         cooldownTimer += Time.deltaTime;
 
+        //Check if player is in range
         if (PlayerInSight())
         {
             if (cooldownTimer >= attackCooldown)
@@ -43,10 +46,12 @@ public class Enemy : MonoBehaviour
                 anim.SetTrigger("attack");
             }
         }
+        //No patrol while attacking
         if (enemyPatrol != null)
             enemyPatrol.enabled = !PlayerInSight();
     }
 
+    //Launch projectile
     private void Attack()
     {
         cooldownTimer = 0;
@@ -54,6 +59,7 @@ public class Enemy : MonoBehaviour
         pineapples[FindPineapple()].GetComponent<EnemyProjectile>().ActivateProjectile();
     }
 
+    //Find pineapple to use
     private int FindPineapple()
     {
         for (int i = 0; i < pineapples.Length; i++)
@@ -72,6 +78,7 @@ public class Enemy : MonoBehaviour
         return hit.collider != null;
     }
 
+    //Debugging for Gizmos
     private void OnDrawGizmos()
     {
 

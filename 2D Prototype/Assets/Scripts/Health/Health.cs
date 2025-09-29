@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class Health : MonoBehaviour
 {
+    //Tracks starting and current health, animation, and singular death
     [SerializeField] private float startingHealth;
     public float currentHealth { get; private set; }
     private Animator anim;
@@ -14,28 +15,16 @@ public class Health : MonoBehaviour
 
     private void Awake()
     {
+        //Get max health for starting
         currentHealth = startingHealth;
         anim = GetComponent<Animator>();
     }
 
     public void AddHealth(float _value)
     {
+        //Give health back to player
         currentHealth = Mathf.Clamp(currentHealth + _value, 0, startingHealth);
     }
-
-   /* public void Respawn()
-    {
-        dead = false;
-
-    foreach (Behaviour component in components)
-        component.enabled = true;
-
-    GetComponent<PlayerMovement>().enabled = true;
-
-    AddHealth(startingHealth);
-    anim.ResetTrigger("die");
-    anim.Play("Idle");
-    } */
 
     public void TakeDamage(float _damage)
     {
@@ -43,10 +32,12 @@ public class Health : MonoBehaviour
 
         if (currentHealth > 0)
         {
+            //Play hurt animation
             anim.SetTrigger("hurt");
         }
         else
         {
+            //Disable player movements and other related components
             if (!dead)
             {
                 anim.SetTrigger("die");
@@ -57,11 +48,13 @@ public class Health : MonoBehaviour
 
                 dead = true;
 
+                //Call game over screen
                 Invoke(nameof(GameOver), 1f);
             }
         }
 
     }
+    //Calling game over
     private void GameOver()
 {
     FindObjectOfType<UIManager>().GameOver();
