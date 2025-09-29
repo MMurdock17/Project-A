@@ -31,7 +31,6 @@ private void Update()
 
 private void OnTriggerEnter2D(Collider2D collision)
 {
-	Debug.Log("Projectile collided with: " + collision.name);
 	
 	if (collision.gameObject == this.gameObject) return;
 
@@ -48,11 +47,11 @@ public void SetDirection(float _direction)
 	hit = false;
 	boxCollider.enabled = true;
 
-	float localScaleX = transform.localScale.x;
+	/*float localScaleX = transform.localScale.x;
 	if (Mathf.Sign(localScaleX) != _direction)
 		localScaleX = -localScaleX;
 
-		transform.localScale = new Vector3(localScaleX, transform.localScale.y, transform.localScale.z);
+		transform.localScale = new Vector3(localScaleX, transform.localScale.y, transform.localScale.z);*/
 
 }
 private void Deactivate()
